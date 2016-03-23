@@ -1,0 +1,27 @@
+@import mixin
+@import reset
+@import animation
+@import compass/css3
+body
+    +custom-scrollbar
+    
+div.container
+    width: 100%
+    position: absolute
+
+div.test
+    +bg("noootown.png")
+    +border-radius(20px)
+    +breakpoint(pad)
+        background: yellow
+
+div.test1
+    top: 0
+    width: 960px
+    height: 600px
+    margin: auto 0
+    background: #00FF00
+    position: absolute
+    .fuck
+        +triangle('top', 5px, #000000 )
+        +triangle('bottom', 5px, #000000 )
