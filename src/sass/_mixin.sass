@@ -5,19 +5,27 @@ $black: #000000
 @import icon
 @import compass/css3
 
-@mixin sprity($sprite, $display: block)
+=css3-prefix($property, $value)
+    -webkit-#{$property}: #{$value}
+    -khtml-#{$property}: #{$value}
+    -moz-#{$property}: #{$value}
+    -ms-#{$property}: #{$value}
+    -o-#{$property}: #{$value}
+    #{$property}: #{$value}
+
+=sprity($sprite, $display: block)
     @extend .icon
     +sprite($sprite, $display)
 
-@mixin font-size($sizeValue: 16) //input px, default 16px
+=font-size($sizeValue: 16) //input px, default 16px
     font-size: $sizeValue + px
     font-size: $sizeValue/16 + rem
 
-@mixin noselect
+=noselect
     +user-select(none)
 
 //----------custom scrollbar-------------
-@mixin custom-scrollbar
+=custom-scrollbar
     &::-webkit-scrollbar
         width: 10px
     &::-webkit-scrollbar-track
@@ -27,12 +35,21 @@ $black: #000000
         +border-radius(5px)
         background: rgb(180,180,180)
 
-@mixin bg($name)
-    background: url("#{$image-location}#{$name}")
-    width: image-width("#{$image-location}#{$name}")
-    height: image-height("#{$image-location}#{$name}")
+=hw($width: 0px, $height:0px)
+    width: $width
+    height: $height
 
-@mixin breakpoint($point)
+=bg($name, $width: 0px, $height: 0px)
+    background: url("#{$image-location}#{$name}")
+    @if $width != 0px or $height != 0px
+        width: $width
+        height: $height
+        background-size: cover
+    @else
+        width: image-width("#{$image-location}#{$name}")
+        height: image-height("#{$image-location}#{$name}")
+
+=breakpoint($point)
     @if $point == pc  
         @media only screen and (max-width: 1024px)  
             @content   
@@ -44,7 +61,7 @@ $black: #000000
             @content
 
 //總寬度 -    欄位間距  *    (欄位數量-1)      /   欄位數量  
-@mixin grid($number, $gutter, $width:960px)  
+=grid($number, $gutter, $width:960px)  
     width: ($width - $gutter*($number - 1))/$number
     margin-right: $gutter
     +box-sizing(border-box)
@@ -52,7 +69,7 @@ $black: #000000
     &:nth-child(#{$number}n)  
         margin-right: 0
 
-@mixin triangle($direction, $size: 6px, $color: #222)
+=triangle($direction, $size: 6px, $color: #222)
     content: ''
     display: block
     position: absolute
