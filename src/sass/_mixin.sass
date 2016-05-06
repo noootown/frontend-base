@@ -17,7 +17,7 @@ $black: #000000
     @extend .icon
     +sprite($sprite, $display)
 
-=font-size($sizeValue: 16) //input px, default 16px
+=font-size($sizeValue: 16)
     font-size: $sizeValue + px
     font-size: $sizeValue/16 + rem
 
@@ -51,13 +51,16 @@ $black: #000000
 
 =breakpoint($point)
     @if $point == pc  
-        @media only screen and (max-width: 1024px)  
+        @media only screen and (max-width: 992px)
             @content   
     @else if $point == pad   
         @media only screen and (max-width: 768px)    
             @content
     @else if $point == mobile   
         @media only screen and (max-width: 320px)     
+            @content
+    @else   
+        @media only screen and (max-width: $point)     
             @content
 
 //總寬度 -    欄位間距  *    (欄位數量-1)      /   欄位數量  
@@ -98,7 +101,6 @@ html
 
 body
     font-family: Helvetica,"Helvetica Neue",Arial,"Heiti SC","Microsoft JhengHei","微軟正黑體","Microsoft Yahei","微軟雅黑",sans-serif
-    line-height: 1.8rem
     position: initial
     font-size: 100%
     min-width: 100%
